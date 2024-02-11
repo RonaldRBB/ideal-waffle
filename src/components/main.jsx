@@ -1,6 +1,7 @@
 import React from 'react';
 import Pog from '../services/journal';
 import Card from './entry/card';
+import Form from './entry/form';
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -31,7 +32,10 @@ export default class Main extends React.Component {
     }
     render() {
         return (
-            this.entriesHtml()
+            <>
+                <Form />
+                {this.entriesHtml()}
+            </>
         )
     }
 }
