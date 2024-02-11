@@ -6,7 +6,7 @@ export default class App extends React.Component {
     render() {
         return <>
             <Navbar />
-            <section className="section">
+            <section className="section has-background-light">
                 <div className="container">
                     <div className="columns is-vcentered is-multiline">
                         <Main />

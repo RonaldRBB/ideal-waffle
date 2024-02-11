@@ -23,15 +23,15 @@ export default class Main extends React.Component {
     }
     entriesHtml() {
         return this.state.journalEntries ? this.state.journalEntries.map((entry) => (
-            <div class="column is-full">
-                <div class="card">
-                    <div class="card-content">
-                        <p class="title">{entry.id} - {entry.title}</p>
-                            <p class="subtitle">{entry.created_at}</p>
-                        <div class="content">
+            <div className="column is-full" key={entry.id}>
+                <div className="card">
+                    <div className="card-content">
+                        <p className="title">{entry.id} - {entry.title}</p>
+                            <p className="subtitle">{entry.created_at}</p>
+                        <div className="content">
                             {entry.content}
                         </div>
-                        <p class="has-text-right">Actualización: {entry.updated_at}</p>
+                        <p className="has-text-right">Actualización: {entry.updated_at}</p>
                     </div>
                 </div>
             </div>
