@@ -1,5 +1,5 @@
 import React from 'react';
-import Pog from '../services/journal_entries';
+import Pog from '../services/journal';
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -12,27 +12,30 @@ export default class Main extends React.Component {
             this.getJournalEntries();
         }, 500);
     }
-    entriesHtml() {
-        return this.state.journalEntries ? this.state.journalEntries.map((entry) => (
-            <div key={entry.id}>
-                <p>id: {entry.id}</p>
-                <p>user_id: {entry.user_id}</p>
-                <p>title: {entry.title}</p>
-                <p>content: {entry.content}</p>
-                <p>created_at: {entry.created_at}</p>
-                <p>updated_at: {entry.updated_at}</p>
-            </div>
-        )) : null;
-    }
     async getJournalEntries() {
         try {
             const pog = new Pog();
-            const journalEntries = await pog.getData();
-            console.log(journalEntries);
+            const journalEntries = (await pog.getAll()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             this.setState({ journalEntries });
         } catch (error) {
             console.error('Error handling JSON data:', error);
         }
+    }
+    entriesHtml() {
+        return this.state.journalEntries ? this.state.journalEntries.map((entry) => (
+            <div class="column is-full">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title">{entry.id} - {entry.title}</p>
+                            <p class="subtitle">{entry.created_at}</p>
+                        <div class="content">
+                            {entry.content}
+                        </div>
+                        <p class="has-text-right">Actualización: {entry.updated_at}</p>
+                    </div>
+                </div>
+            </div>
+        )) : null;
     }
     render() {
         return (

@@ -1,11 +1,19 @@
 import React from 'react';
 import Main from './components/main';
-
+import Navbar from './components/navbar';
+import Footer from './components/footer';
 export default class App extends React.Component {
-  render() {
-    return <>
-      <div>hello world</div>
-      <Main />
-    </>
-  }
+    render() {
+        return <>
+            <Navbar />
+            <section className="section">
+                <div className="container">
+                    <div className="columns is-vcentered is-multiline">
+                        <Main />
+                    </div>
+                </div>
+            </section>
+            <Footer />
+        </>
+    }
 }

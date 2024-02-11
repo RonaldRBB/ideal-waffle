@@ -2,9 +2,15 @@ export default class Pog {
     constructor() {
         this.url = process.env.REACT_APP_JOURNAL_API_URL;
     }
-    async getData() {
+    async getAll() {
+        return this.fetchAPI('/journal_entries');
+    }
+    async getOne(id) {
+        return this.fetchAPI(`/journal_entry/${id}`);
+    }
+    async fetchAPI(endpoint) {
         try {
-            const response = await fetch(`${this.url}/journal_entries`);
+            const response = await fetch(`${this.url}${endpoint}`);
             const jsonData = await response.json();
             console.log(jsonData);
             return jsonData;
@@ -13,4 +19,5 @@ export default class Pog {
             throw error;
         }
     }
+
 }
