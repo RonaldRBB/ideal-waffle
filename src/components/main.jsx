@@ -1,5 +1,6 @@
 import React from 'react';
 import Pog from '../services/journal';
+import Card from './entry/card';
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -24,16 +25,7 @@ export default class Main extends React.Component {
     entriesHtml() {
         return this.state.journalEntries ? this.state.journalEntries.map((entry) => (
             <div className="column is-full" key={entry.id}>
-                <div className="card">
-                    <div className="card-content">
-                        <p className="title">{entry.id} - {entry.title}</p>
-                            <p className="subtitle">{entry.created_at}</p>
-                        <div className="content">
-                            {entry.content}
-                        </div>
-                        <p className="has-text-right">Actualización: {entry.updated_at}</p>
-                    </div>
-                </div>
+                <Card entry={entry} />
             </div>
         )) : null;
     }
