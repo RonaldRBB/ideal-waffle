@@ -10,9 +10,7 @@ export default class Card extends React.Component {
     deleteEntry() {
         const pog = new Pog();
         pog.delete(this.props.entry.id);
-        setTimeout(() => {
-            this.props.getJournalEntries();
-        }, 500);
+        this.props.getJournalEntries();
     }
     render() {
         return (

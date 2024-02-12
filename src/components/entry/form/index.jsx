@@ -31,6 +31,12 @@ export default class Form extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        const { title, content } = this.state;
+        if (title === '' || content === '') {
+            alert('Error: Title and content must not be empty.');
+            return;
+        }
+        event.preventDefault();
         const pog = new Pog();
         pog.create(4, this.state.title, this.state.content);
         this.props.getJournalEntries();
@@ -52,11 +58,11 @@ export default class Form extends React.Component {
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label">Message</label>
+                        <label className="label">Mensaje</label>
                         <div className="control">
                             <textarea
                                 className="textarea"
-                                placeholder="Textarea"
+                                placeholder="Mensaje"
                                 value={this.state.content}
                                 onChange={this.handleContentChange}
                             />
