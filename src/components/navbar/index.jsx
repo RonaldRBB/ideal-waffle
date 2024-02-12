@@ -1,15 +1,44 @@
-import { useTranslation } from 'react-i18next';
-
-const Navbar = () => {
-    const { t } = useTranslation();
-    return (
-        <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
-            <div className="navbar-brand">
-                <a className="navbar-item" href="/">
-                    {t('appName')}
-                </a>
-            </div>
-        </nav>
-    );
+import React from 'react';
+import { withTranslation } from 'react-i18next';
+class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.changeLanguage = this.changeLanguage.bind(this);
+    }
+    changeLanguage(event) {
+        const { i18n } = this.props;
+        i18n.changeLanguage(event.target.value);
+    }
+    render() {
+        const { t } = this.props;
+        return (
+            <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
+                <div className="navbar-brand">
+                    <a className="navbar-item" href="https://bulma.io">
+                        <img
+                            src="https://bulma.io/images/bulma-logo.png"
+                            width={112}
+                            height={28}
+                            alt="Bulma: Free, open source, and modern CSS framework based on Flexbox"
+                        />
+                    </a>
+                </div>
+                <div id="navbarBasicExample" className="navbar-menu">
+                    <div className="navbar-start">
+                        <a href="/" className="navbar-item">{t('appName')}</a>
+                    </div>
+                    <div className="navbar-end">
+                        <div className="navbar-item">
+                            <div className="buttons">
+                                <button className="button is-primary" onClick={this.changeLanguage} value='en'>English</button>
+                                <button className="button is-primary" onClick={this.changeLanguage} value='es'>Español</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        );
+    }
 }
-export default Navbar;
+
+export default withTranslation()(Navbar);
