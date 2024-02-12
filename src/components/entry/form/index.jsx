@@ -1,4 +1,5 @@
 import React from 'react';
+
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -43,6 +44,7 @@ export default class Form extends React.Component {
                                 className="input"
                                 type="text"
                                 placeholder="Titulo"
+                                value={this.state.title}
                                 onChange={this.handleTitleChange}
                             />
                         </div>
@@ -53,17 +55,26 @@ export default class Form extends React.Component {
                             <textarea
                                 className="textarea"
                                 placeholder="Textarea"
-                                defaultValue={""}
+                                value={this.state.content}
                                 onChange={this.handleContentChange}
                             />
                         </div>
                     </div>
                     <div className="field is-grouped">
                         <div className="control">
-                            <button className="button is-link" type="submit">Submit</button>
+                            <button
+                                className="button is-link"
+                                type="submit">
+                                Submit
+                            </button>
                         </div>
                         <div className="control">
-                            <button className="button is-link is-light" type="button" onClick={this.handleDelete}>Cancel</button>
+                            <button
+                                className="button is-link is-light"
+                                type="button"
+                                onClick={this.handleDelete}>
+                                Cancel
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -71,4 +82,3 @@ export default class Form extends React.Component {
         )
     }
 }
-
