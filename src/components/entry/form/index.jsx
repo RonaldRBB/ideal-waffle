@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Pog from '../../../services/journal';
 export default class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -31,7 +31,9 @@ export default class Form extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        alert('A form was submitted: ' + this.state.title + ' ' + this.state.content);
+        const pog = new Pog();
+        pog.create(4, this.state.title, this.state.content);
+        this.props.getJournalEntries();
     }
     render() {
         return (
