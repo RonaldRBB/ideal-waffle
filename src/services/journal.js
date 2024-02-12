@@ -3,7 +3,11 @@ export default class Pog {
         this.url = process.env.REACT_APP_JOURNAL_API_URL;
     }
     async index() {
-        return this.fetchAPI('/journal_entries');
+        return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(this.fetchAPI('/journal_entries'));
+        }, 100);
+    });
     }
     async getOne(id) {
         return this.fetchAPI(`/journal_entry/${id}`);
@@ -41,6 +45,21 @@ export default class Pog {
                 "title": title,
                 "content": content
             })
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const jsonData = await response.json();
+        return jsonData;
+    }
+    async delete(id) {
+        const response = await fetch(`${this.url}/journal_entry/${id}`, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

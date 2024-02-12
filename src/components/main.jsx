@@ -11,14 +11,13 @@ export default class Main extends React.Component {
         this.getJournalEntries = this.getJournalEntries.bind(this);
     }
     componentDidMount() {
-        setTimeout(() => {
-            this.getJournalEntries();
-        }, 500);
+        this.getJournalEntries();
     }
     async getJournalEntries() {
         try {
             const pog = new Pog();
-            const journalEntries = (await pog.index()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            // const journalEntries = (await pog.index()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const journalEntries = (await pog.index()).sort((a, b) => b.id - a.id);
             this.setState({ journalEntries });
         } catch (error) {
             console.error('Error handling JSON data:', error);
@@ -27,7 +26,7 @@ export default class Main extends React.Component {
     entriesHtml() {
         return this.state.journalEntries ? this.state.journalEntries.map((entry) => (
             <div className="column is-full" key={entry.id}>
-                <Card entry={entry} />
+                <Card entry={entry} getJournalEntries={this.getJournalEntries} />
             </div>
         )) : null;
     }
