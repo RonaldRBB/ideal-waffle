@@ -10,7 +10,17 @@ export default class Pog {
     }
     async fetchAPI(endpoint) {
         try {
-            const response = await fetch(`${this.url}${endpoint}`);
+            const response = await fetch(`${this.url}${endpoint}`, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const jsonData = await response.json();
             return jsonData;
         } catch (error) {
@@ -21,8 +31,10 @@ export default class Pog {
     async create(user_id, title, content) {
         const response = await fetch(`${this.url}/journal_entry`, {
             method: 'POST',
+            mode: 'cors',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             body: JSON.stringify({
                 "user_id": user_id,
@@ -30,7 +42,11 @@ export default class Pog {
                 "content": content
             })
         });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const jsonData = await response.json();
         return jsonData;
     }
 }
+
