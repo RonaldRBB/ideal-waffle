@@ -1,15 +1,15 @@
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-export default class Navbar extends React.Component {
-    render() {
-        return (
-            <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
-                <div className="navbar-brand">
-                    <a className="navbar-item" href="/">
-                        Diario / Bitácora
-                    </a>
-                </div>
-            </nav>
-        )
-    }
+const Navbar = () => {
+    const { t } = useTranslation();
+    return (
+        <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
+            <div className="navbar-brand">
+                <a className="navbar-item" href="/">
+                    {t('appName')}
+                </a>
+            </div>
+        </nav>
+    );
 }
+export default Navbar;
