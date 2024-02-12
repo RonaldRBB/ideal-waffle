@@ -40,6 +40,10 @@ export default class Form extends React.Component {
         const pog = new Pog();
         pog.create(4, this.state.title, this.state.content);
         this.props.getJournalEntries();
+        this.setState({
+            title: '',
+            content: ''
+        });
     }
     render() {
         return (

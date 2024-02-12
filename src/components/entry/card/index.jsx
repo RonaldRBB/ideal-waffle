@@ -32,9 +32,9 @@ export default class Card extends React.Component {
                     <p className="has-text-right">Actualización: {this.props.entry.updated_at}</p>
                 </div>
                 <footer className="card-footer">
-                    <button className="button card-footer-item">Save</button>
-                    <button className="button card-footer-item">Edit</button>
-                    <button className="button card-footer-item" onClick={this.deleteEntry}>Delete</button>
+                    <div className="card-footer-item has-text-info">Save</div>
+                    <div className="card-footer-item has-text-info">Edit</div>
+                    <div className="card-footer-item has-text-info" onClick={this.deleteEntry}>Delete</div>
                 </footer>
             </div>
         )
