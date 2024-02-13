@@ -14,19 +14,15 @@ class Navbar extends React.Component {
         return (
             <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
-                    <a className="navbar-item" href="https://bulma.io">
-                        <img
-                            src="https://bulma.io/images/bulma-logo.png"
-                            width={112}
-                            height={28}
-                            alt="Bulma: Free, open source, and modern CSS framework based on Flexbox"
+                    <a className="navbar-item" href="/">
+                        <img className='image is-32x32'
+                        style={{ height: '100%' }}
+                            src="logo_no_bg.png"
+                            alt={t('appName')}
                         />
                     </a>
                 </div>
                 <div id="navbarBasicExample" className="navbar-menu">
-                    <div className="navbar-start">
-                        <a href="/" className="navbar-item">{t('appName')}</a>
-                    </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
                             <div className="buttons">
