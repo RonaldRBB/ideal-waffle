@@ -1,8 +1,8 @@
 import React from 'react';
-import Main from './components/main';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Pog from '../src/services/journal';
+import Main from './components/main';
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -27,13 +27,9 @@ export default class App extends React.Component {
     render() {
         return <>
             <Navbar />
-            <section className="section has-background-light" style={{ minHeight: '80vh' }}>
-                <div className="container">
-                    <div className="columns is-vcentered is-multiline">
-                        <Main journalEntries={this.state.journalEntries} getJournalEntries={this.getJournalEntries} />
-                    </div>
-                </div>
-            </section>
+            <Main
+                journalEntries={this.state.journalEntries}
+                getJournalEntries={this.getJournalEntries} />
             <Footer />
         </>
     }
