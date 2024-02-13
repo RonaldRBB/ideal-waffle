@@ -9,11 +9,39 @@ export default class Main extends React.Component {
             </div>
         )) : null;
     }
+    entries() {
+        let rows = [];
+        this.props.journalEntries.forEach((entry) => {
+            rows.push(
+                <tr>
+                    <td>{entry.title}</td>
+                    <td>{entry.created_at}</td>
+                </tr>
+            )
+        });
+        return (
+            <div className="table-container">
+                <table className="table bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                        <th style={{ width: '80%' }}>Entrada</th>
+                        <th style={{ width: '20%' }}>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows}
+                    </tbody>
+                </table>
+            </div>
+        )
+    }
     render() {
         return (
             <>
                 <Form getJournalEntries={this.props.getJournalEntries} />
-                {this.entriesHtml()}
+                <div className="column is-full box">
+                    {this.entries()}
+                </div >
             </>
         )
     }
