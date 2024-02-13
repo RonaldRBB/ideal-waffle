@@ -49,7 +49,7 @@ class Form extends React.Component {
     render() {
         const { t } = this.props;
         return (
-            <div className="container box">
+            <div className="box">
                 <form onSubmit={this.handleSubmit}>
                     <div className="field">
                         <label className="label">{t('entryForm.title')}</label>

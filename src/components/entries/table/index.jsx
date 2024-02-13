@@ -1,9 +1,7 @@
 import React from 'react';
-import Form from './form';
-import Pog from '../../services/journal';
+import Pog from '../../../services/journal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Table from './table';
-export default class Entries extends React.Component {
+export default class Table extends React.Component {
     tableEntries() {
         let rows = [];
         console.log(this.props.journalEntries);
@@ -14,7 +12,11 @@ export default class Entries extends React.Component {
                     <td style={{ width: '80%' }}>
                         <span className="icon-text">
                             <span>{entry.title}</span>
-                            <span className="icon" style={{ cursor: 'pointer' }}>
+                            <span
+                                className="icon" style={{ cursor: 'pointer', opacity: .2 }}
+                                onMouseEnter={(e) => e.currentTarget.style.opacity = 1}
+                                onMouseLeave={(e) => e.currentTarget.style.opacity = .2}
+                            >
                                 <FontAwesomeIcon icon="fa-solid fa-trash-can" onClick={() => this.deleteEntry(entry.id)} />
                             </span>
                         </span>
@@ -23,15 +25,7 @@ export default class Entries extends React.Component {
                 </tr>
             );
         });
-        return (
-            <div className="table-container box">
-                <table className="table bordered is-striped is-hoverable is-fullwidth">
-                    <tbody>
-                        {rows}
-                    </tbody>
-                </table>
-            </div>
-        )
+        return rows
     }
     deleteEntry(id) {
         const x = window.confirm("Do you really want to delete?");
@@ -42,14 +36,13 @@ export default class Entries extends React.Component {
     }
     render() {
         return (
-            <>
-                <div className="column is-full">
-                    <Form getJournalEntries={this.props.getJournalEntries} />
-                </div>
-                <div className="column is-full">
-                    <Table journalEntries={this.props.journalEntries} getJournalEntries={this.props.getJournalEntries} />
-                </div >
-            </>
+            <div className="table-container box">
+                <table className="table bordered is-striped is-hoverable is-fullwidth">
+                    <tbody>
+                        {this.tableEntries()}
+                    </tbody>
+                </table>
+            </div>
         )
     }
 }
