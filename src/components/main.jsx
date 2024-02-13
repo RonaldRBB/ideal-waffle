@@ -11,16 +11,18 @@ export default class Main extends React.Component {
     }
     entries() {
         let rows = [];
+        console.log(this.props.journalEntries);
+        if (!this.props.journalEntries) return null;
         this.props.journalEntries.forEach((entry) => {
             rows.push(
                 <tr>
                     <td>{entry.title}</td>
                     <td>{entry.created_at}</td>
                 </tr>
-            )
+            );
         });
         return (
-            <div className="table-container">
+            <div className="table-container box">
                 <table className="table bordered is-striped is-narrow is-hoverable is-fullwidth">
                     <thead>
                         <tr>
@@ -39,7 +41,7 @@ export default class Main extends React.Component {
         return (
             <>
                 <Form getJournalEntries={this.props.getJournalEntries} />
-                <div className="column is-full box">
+                <div className="column is-full">
                     {this.entries()}
                 </div >
             </>
