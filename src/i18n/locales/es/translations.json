@@ -1,3 +1,12 @@
 {
-    "appName": "Diario / Bitácora"
+    "appName": "Diario / Bitácora",
+    "entryForm": {
+        "title": "Título",
+        "content": "Contenido"
+    },
+    "submitButton": "Enviar",
+    "cancelButton": "Cancelar",
+    "saveButton": "Guardar",
+    "editButton": "Editar",
+    "deleteButton": "Eliminar"
 }

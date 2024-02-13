@@ -1,6 +1,7 @@
 import React from 'react';
 import Pog from '../../../services/journal';
-export default class Form extends React.Component {
+import { withTranslation } from 'react-i18next';
+class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,27 +47,28 @@ export default class Form extends React.Component {
         });
     }
     render() {
+        const { t } = this.props;
         return (
             <div className="container box">
                 <form onSubmit={this.handleSubmit}>
                     <div className="field">
-                        <label className="label">Titulo</label>
+                        <label className="label">{t('entryForm.title')}</label>
                         <div className="control">
                             <input
                                 className="input"
                                 type="text"
-                                placeholder="Titulo"
+                                placeholder={t('entryForm.title')}
                                 value={this.state.title}
                                 onChange={this.handleTitleChange}
                             />
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label">Mensaje</label>
+                        <label className="label">{t('entryForm.content')}</label>
                         <div className="control">
                             <textarea
                                 className="textarea"
-                                placeholder="Mensaje"
+                                placeholder={t('entryForm.content')}
                                 value={this.state.content}
                                 onChange={this.handleContentChange}
                             />
@@ -77,7 +79,7 @@ export default class Form extends React.Component {
                             <button
                                 className="button is-link"
                                 type="submit">
-                                Submit
+                                {t('submitButton')}
                             </button>
                         </div>
                         <div className="control">
@@ -85,7 +87,7 @@ export default class Form extends React.Component {
                                 className="button is-link is-light"
                                 type="button"
                                 onClick={this.handleDelete}>
-                                Cancel
+                                {t('cancelButton')}
                             </button>
                         </div>
                     </div>
@@ -94,3 +96,4 @@ export default class Form extends React.Component {
         )
     }
 }
+export default withTranslation()(Form);

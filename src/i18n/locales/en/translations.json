@@ -1,3 +1,12 @@
 {
-    "appName": "Journal / Logbook"
+    "appName": "Journal / Logbook",
+    "entryForm": {
+        "title": "Title",
+        "content": "Content"
+    },
+    "submitButton": "Submit",
+    "cancelButton": "Cancel",
+    "saveButton": "Save",
+    "editButton": "Edit",
+    "deleteButton": "Delete"
 }

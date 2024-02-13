@@ -2,7 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Pog from '../../../services/journal';
-export default class Card extends React.Component {
+import { withTranslation } from 'react-i18next';
+class Card extends React.Component {
     constructor(props) {
         super(props);
         this.deleteEntry = this.deleteEntry.bind(this);
@@ -13,6 +14,7 @@ export default class Card extends React.Component {
         this.props.getJournalEntries();
     }
     render() {
+        const { t } = this.props;
         return (
             <div className="card">
                 <header className="card-header">
@@ -32,11 +34,13 @@ export default class Card extends React.Component {
                     <p className="has-text-right">Actualización: {this.props.entry.updated_at}</p>
                 </div>
                 <footer className="card-footer">
-                    <div className="card-footer-item has-text-info">Save</div>
-                    <div className="card-footer-item has-text-info">Edit</div>
-                    <div className="card-footer-item has-text-info" onClick={this.deleteEntry}>Delete</div>
+                    <div className="card-footer-item has-text-info">{t('saveButton')}</div>
+                    <div className="card-footer-item has-text-info">{t('editButton')}</div>
+                    <div className="card-footer-item has-text-info" onClick={this.deleteEntry}>{t('deleteButton')}</div>
                 </footer>
             </div>
         )
     }
 }
+
+export default withTranslation()(Card)
