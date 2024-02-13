@@ -1,15 +1,19 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 
-export default class Footer extends React.Component {
+class Footer extends React.Component {
     render() {
+        const { t } = this.props;
+        const currentYear = new Date().getFullYear();
         return (
-            <footer className="footer">
+            <footer className="footer has-background-primary">
                 <div className="content has-text-centered">
                     <p>
-                        Diario / Bitácora - &copy; 2024
+                        {t('appName')} - &copy; {currentYear}
                     </p>
                 </div>
             </footer>
         )
     }
 }
+export default withTranslation()(Footer)

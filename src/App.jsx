@@ -27,7 +27,7 @@ export default class App extends React.Component {
     render() {
         return <>
             <Navbar />
-            <section className="section has-background-light">
+            <section className="section has-background-light" style={{ minHeight: '80vh' }}>
                 <div className="container">
                     <div className="columns is-vcentered is-multiline">
                         <Main journalEntries={this.state.journalEntries} getJournalEntries={this.getJournalEntries} />
