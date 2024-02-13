@@ -1,6 +1,5 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Pog from '../../../services/journal';
 import { withTranslation } from 'react-i18next';
 class Card extends React.Component {
@@ -23,7 +22,7 @@ class Card extends React.Component {
                     </p>
                     <button className="card-header-icon" aria-label="more options">
                         <span className="icon">
-                            <FontAwesomeIcon icon={faAngleDown} />
+                            {/* <FontAwesomeIcon icon={faAngleDown} /> */}
                         </span>
                     </button>
                 </header>
