@@ -17,7 +17,7 @@ class Navbar extends React.Component {
                     <a className="navbar-item" href="/">
                         <img className='image is-32x32'
                         style={{ height: '100%' }}
-                            src="logo_no_bg.png"
+                            src="logo_no_bg_2.png"
                             alt={t('appName')}
                         />
                     </a>
