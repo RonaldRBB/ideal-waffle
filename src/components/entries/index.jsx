@@ -9,27 +9,22 @@ export default class Entries extends React.Component {
         if (!this.props.journalEntries) return null;
         this.props.journalEntries.forEach((entry) => {
             rows.push(
-                <tr>
-                    <td style={{ width: '50%' }}>{entry.title}
-                        <span className="icon">
-                            <FontAwesomeIcon icon="fa-solid fa-trash-can" />
+                <tr key={entry.id}>
+                    <td style={{ width: '80%' }}>
+                        <span className="icon-text">
+                            <span>{entry.title}</span>
+                            <span className="icon"style={{ cursor: 'pointer' }}>
+                                <FontAwesomeIcon icon="fa-solid fa-trash-can" onClick={() => this.deleteEntry(entry.id)} />
+                            </span>
                         </span>
                     </td>
-                    {/* delete button */}
-                    <td style={{ width: '10%' }}><button className="button is-small is-danger" onClick={() => this.deleteEntry(entry.id)}>Eliminar</button></td>
-                    <td style={{ width: '10%' }}>{entry.created_at}</td>
+                    <td style={{ width: '20%' }}>{entry.created_at}</td>
                 </tr>
             );
         });
         return (
             <div className="table-container box">
                 <table className="table bordered is-striped is-hoverable is-fullwidth">
-                    {/* <thead>
-                        <tr>
-                        <th style={{ width: '80%' }}>Entrada</th>
-                        <th style={{ width: '20%' }}>Fecha</th>
-                        </tr>
-                    </thead> */}
                     <tbody>
                         {rows}
                     </tbody>
@@ -38,12 +33,13 @@ export default class Entries extends React.Component {
         )
     }
     deleteEntry(id) {
+        const x = window.confirm("Do you really want to delete?");
+        if (!x) return;
         const pog = new Pog();
         pog.delete(id);
         this.props.getJournalEntries();
     }
     render() {
-        // window.confirm("Do you really want to leave?");
         return (
             <>
                 <Form getJournalEntries={this.props.getJournalEntries} />
