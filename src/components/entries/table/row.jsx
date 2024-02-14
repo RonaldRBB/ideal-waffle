@@ -1,12 +1,24 @@
 import React from 'react';
 import Pog from '../../../services/journal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 class Row extends React.Component {
-    showIcons(id, opacity = 0) {
-        document.getElementById(`delete${id}`).style.opacity = opacity;
+    constructor(props) {
+        super(props);
+        this.state = {
+            showIcons: false
+        };
+        this.showIcons = this.showIcons.bind(this);
+        this.hideIcons = this.hideIcons.bind(this);
+        this.deleteEntry = this.deleteEntry.bind(this);
     }
 
+    showIcons = () => {
+        this.setState({ showIcons: true });
+    }
+
+    hideIcons = () => {
+        this.setState({ showIcons: false });
+    }
     deleteEntry(id) {
         const answer = window.confirm("Do you really want to delete?");
         if (!answer) return;
@@ -16,25 +28,28 @@ class Row extends React.Component {
     }
     render() {
         const { entry } = this.props;
+        const { showIcons } = this.state;
         return (
-            <tr key={entry.id}
-                onMouseEnter={() => this.showIcons(entry.id, 1)}
-                onMouseLeave={() => this.showIcons(entry.id)}
+            <tr
+                key={entry.id}
+                onMouseEnter={this.showIcons}
+                onMouseLeave={this.hideIcons}
             >
-                <td style={{ width: '80%' }}>
+                <td>
                     <span className="icon-text">
                         <span>{entry.title}</span>
-                        <span id={`delete${entry.id}`}
+                        <span
                             className="icon"
-                            style={{ cursor: 'pointer', opacity: .0 }}>
-                            <FontAwesomeIcon icon="fa-solid fa-trash-can" onClick={() => this.deleteEntry(entry.id)} />
+                            style={{ cursor: 'pointer', opacity: showIcons ? 1 : 0 }}
+                            onClick={() => this.deleteEntry(entry.id)}
+                        >
+                            <FontAwesomeIcon icon="fa-solid fa-trash-can" />
                         </span>
                     </span>
                 </td>
-                <td style={{ width: '20%' }}>{entry.created_at}</td>
+                <td style={{ width: '30%' }}>{entry.created_at}</td>
             </tr>
         );
     }
 }
-
-export default Row
+export default Row;

@@ -1,0 +1,6 @@
+.column.is-full,
+.is-6,
+.is-0,
+.is-hidden {
+    transition: width 0.5s ease;
+}

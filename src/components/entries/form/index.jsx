@@ -72,6 +72,7 @@ class Form extends React.Component {
                                 placeholder={t('entryForm.content')}
                                 value={this.state.content}
                                 onChange={this.handleContentChange}
+                                rows="14"
                             />
                         </div>
                     </div>
