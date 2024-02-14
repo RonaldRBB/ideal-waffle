@@ -8,5 +8,6 @@
     "cancelButton": "Cancelar",
     "saveButton": "Guardar",
     "editButton": "Editar",
-    "deleteButton": "Eliminar"
+    "deleteButton": "Eliminar",
+    "alertErrorSubmit": "Error: El título y el contenido no deben estar vacíos."
 }

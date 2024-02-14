@@ -33,8 +33,9 @@ class Form extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         const { title, content } = this.state;
+        const { t } = this.props;
         if (title === '' || content === '') {
-            alert('Error: Title and content must not be empty.');
+            alert(t('alertErrorSubmit'));
             return;
         }
         event.preventDefault();
