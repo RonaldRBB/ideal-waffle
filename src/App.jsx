@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Pog from '../src/services/journal';
@@ -19,17 +19,16 @@ class App extends React.Component {
         this.setState({ language: i18n.language });
         this.getJournalEntries();
     }
-    changeLanguage() {
+    changeLanguage(callback) {
         const { i18n } = this.props;
-        this.setState(prevState => ({
-            language: prevState.language === 'en' ? 'es' : 'en'
-        }))
-        i18n.changeLanguage(this.state.language);
+        const newLang = i18n.language === 'en' ? 'es' : 'en';
+        this.setState({ language: newLang });
+        i18n.changeLanguage(newLang);
+        if (callback) { callback(newLang); }
     }
     async getJournalEntries() {
         try {
             const pog = new Pog();
-            // const journalEntries = (await pog.index()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             const journalEntries = (await pog.index()).sort((a, b) => b.id - a.id);
             this.setState({ journalEntries });
         } catch (error) {

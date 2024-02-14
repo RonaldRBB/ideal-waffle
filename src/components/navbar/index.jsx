@@ -10,14 +10,14 @@ class Navbar extends React.Component {
         this.changeButtonText = this.changeButtonText.bind(this);
     }
     changeButtonText() {
-        this.props.changeLanguage();
-        const { i18n } = this.props;
-        this.setState({ buttonText: i18n.language === 'en' ? 'es' : 'en' });
+        this.props.changeLanguage(lang => {
+            this.setState({ buttonText: lang==='en' ? 'es' : 'en' });
+        });
     }
     render() {
         const { t } = this.props;
         return (
-            <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
+            <nav className="navbar is-primary">
                 <div className="navbar-brand">
                     <a className="navbar-item" href="/">
                         <img className='image is-32x32'
@@ -27,7 +27,7 @@ class Navbar extends React.Component {
                         />
                     </a>
                 </div>
-                <div id="navbarBasicExample" className="navbar-menu">
+                <div className="navbar-menu">
                     <div className="navbar-end">
                         <div className="navbar-item">
                             <div className="buttons">

@@ -20,7 +20,7 @@ class Card extends React.Component {
                     <p className="card-header-title">
                         {this.props.entry.id} - {this.props.entry.title} - {this.props.entry.created_at}
                     </p>
-                    <button className="card-header-icon" aria-label="more options">
+                    <button className="card-header-icon">
                         <span className="icon">
                             {/* <FontAwesomeIcon icon={faAngleDown} /> */}
                         </span>

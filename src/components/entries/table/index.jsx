@@ -3,7 +3,7 @@ import Pog from '../../../services/journal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default class Table extends React.Component {
     tableEntries() {
-        console.log(this.props.journalEntries);
+        console.log("entries: ", this.props.journalEntries);
         if (!this.props.journalEntries) return null;
         return this.props.journalEntries.map((entry) => (
             <tr key={entry.id}
