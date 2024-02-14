@@ -3,16 +3,28 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Pog from '../src/services/journal';
 import Main from './components/main';
-export default class App extends React.Component {
+import { withTranslation } from 'react-i18next';
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            journalEntries: null
+            journalEntries: null,
+            language: null
         }
         this.getJournalEntries = this.getJournalEntries.bind(this);
+        this.changeLanguage = this.changeLanguage.bind(this);
     }
     componentDidMount() {
+        const { i18n } = this.props;
+        this.setState({ language: i18n.language });
         this.getJournalEntries();
+    }
+    changeLanguage() {
+        const { i18n } = this.props;
+        this.setState(prevState => ({
+            language: prevState.language === 'en' ? 'es' : 'en'
+        }))
+        i18n.changeLanguage(this.state.language);
     }
     async getJournalEntries() {
         try {
@@ -26,11 +38,13 @@ export default class App extends React.Component {
     }
     render() {
         return <>
-            <Navbar />
+            <Navbar changeLanguage={this.changeLanguage} />
             <Main
                 journalEntries={this.state.journalEntries}
-                getJournalEntries={this.getJournalEntries} />
+                getJournalEntries={this.getJournalEntries}
+            />
             <Footer />
         </>
     }
 }
+export default withTranslation()(App); 
