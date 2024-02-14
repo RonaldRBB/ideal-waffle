@@ -5,7 +5,10 @@ export default class Table extends React.Component {
         console.log("entries: ", this.props.journalEntries);
         if (!this.props.journalEntries) return null;
         return this.props.journalEntries.map((entry) => (
-            <Row key={entry.id} entry={entry} getJournalEntries={this.props.getJournalEntries} />
+            <Row key={entry.id}
+                entry={entry}
+                getJournalEntries={this.props.getJournalEntries}
+            />
         ));
     }
     render() {
