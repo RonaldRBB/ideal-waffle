@@ -5,19 +5,20 @@ class Row extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showIcons: false
+            opacity: 0
         };
         this.showIcons = this.showIcons.bind(this);
         this.hideIcons = this.hideIcons.bind(this);
         this.deleteEntry = this.deleteEntry.bind(this);
     }
-
-    showIcons = () => {
-        this.setState({ showIcons: true });
+    showIcons() {
+        this.setState({ opacity: .2 });
     }
-
-    hideIcons = () => {
-        this.setState({ showIcons: false });
+    hideIcons() {
+        this.setState({ opacity: 0 });
+    }
+    handleIconOpacity(event) {
+        event.target.style.opacity = event.target.style.opacity === '1' ? '.2' : '1';
     }
     deleteEntry(id) {
         const answer = window.confirm("Do you really want to delete?");
@@ -28,7 +29,6 @@ class Row extends React.Component {
     }
     render() {
         const { entry } = this.props;
-        const { showIcons } = this.state;
         return (
             <tr
                 key={entry.id}
@@ -39,8 +39,19 @@ class Row extends React.Component {
                     <span className="icon-text">
                         <span>{entry.title}</span>
                         <span
+                            onMouseEnter={this.handleIconOpacity}
+                            onMouseLeave={this.handleIconOpacity}
                             className="icon"
-                            style={{ cursor: 'pointer', opacity: showIcons ? 1 : 0 }}
+                            style={{ cursor: 'pointer', opacity: this.state.opacity }}
+                            onClick={() => this.deleteEntry(entry.id)}
+                        >
+                            <FontAwesomeIcon icon="fa-solid fa-pen" />
+                        </span>
+                        <span
+                            onMouseEnter={this.handleIconOpacity}
+                            onMouseLeave={this.handleIconOpacity}
+                            className="icon"
+                            style={{ cursor: 'pointer', opacity: this.state.opacity }}
                             onClick={() => this.deleteEntry(entry.id)}
                         >
                             <FontAwesomeIcon icon="fa-solid fa-trash-can" />
