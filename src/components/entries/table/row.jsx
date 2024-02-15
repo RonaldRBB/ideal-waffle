@@ -43,7 +43,7 @@ class Row extends React.Component {
                             onMouseLeave={this.handleIconOpacity}
                             className="icon"
                             style={{ cursor: 'pointer', opacity: this.state.opacity }}
-                            onClick={() => this.deleteEntry(entry.id)}
+                            onClick={() => this.editEntry(entry.id)}
                         >
                             <FontAwesomeIcon icon="fa-solid fa-pen" />
                         </span>

@@ -11,7 +11,7 @@ class Form extends React.Component {
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit = this.submitEntry.bind(this);
     }
     handleTitleChange(event) {
         this.setState({
@@ -30,7 +30,7 @@ class Form extends React.Component {
             content: ''
         });
     }
-    handleSubmit(event) {
+    submitEntry(event) {
         event.preventDefault();
         const { title, content } = this.state;
         const { t } = this.props;
@@ -40,7 +40,7 @@ class Form extends React.Component {
         }
         event.preventDefault();
         const pog = new Pog();
-        pog.create(4, this.state.title, this.state.content);
+        pog.create(4, title, content);
         this.props.getJournalEntries();
         this.setState({
             title: '',
@@ -51,7 +51,7 @@ class Form extends React.Component {
         const { t } = this.props;
         return (
             <div className="box">
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.submitEntry}>
                     <div className="field">
                         <label className="label">{t('entryForm.title')}</label>
                         <div className="control">

@@ -52,6 +52,25 @@ export default class Pog {
         const jsonData = await response.json();
         return jsonData;
     }
+    async update(id, title, content) {
+        const response = await fetch(`${this.url}/journal_entry/${id}`, {
+            method: 'PUT',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                "title": title,
+                "content": content
+            })
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const jsonData = await response.json();
+        return jsonData;
+    }
     async delete(id) {
         const response = await fetch(`${this.url}/journal_entry/${id}`, {
             method: 'DELETE',
