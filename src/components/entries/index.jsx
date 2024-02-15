@@ -1,7 +1,6 @@
 import React from 'react';
 import Form from './form';
 import Table from './table';
-// import './entries.css'; // Asegúrate de importar el archivo CSS donde defines las transiciones.
 
 export default class Entries extends React.Component {
     constructor(props) {
@@ -37,7 +36,7 @@ export default class Entries extends React.Component {
                             getJournalEntries={this.props.getJournalEntries}
                         />
                     </div>
-                    <div id="form" className={`column ${this.state.isFormVisible ? 'is-6' : 'is-0'}`}>
+                    <div id="form" className={'column is-6'}>
                         <Form getJournalEntries={this.props.getJournalEntries} />
                     </div>
                 </div>

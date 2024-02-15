@@ -47,7 +47,7 @@ class Row extends React.Component {
                         </span>
                     </span>
                 </td>
-                <td style={{ width: '30%' }}>{entry.created_at}</td>
+                <td className='has-text-right'>{entry.created_at}</td>
             </tr>
         );
     }
