@@ -11,7 +11,8 @@ class Form extends React.Component {
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleContentChange = this.handleContentChange.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.handleSubmit = this.submitEntry.bind(this);
+        this.submitEntry = this.submitEntry.bind(this);
+
     }
     handleTitleChange(event) {
         this.setState({

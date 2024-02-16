@@ -10,17 +10,15 @@ export default class Entries extends React.Component {
         };
         this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
     }
-
     toggleFormVisibility() {
         this.setState(prevState => ({
             isFormVisible: !prevState.isFormVisible
         }));
     }
-
     render() {
         return (
             <>
-                <div className="columns is-vcentered">
+                <div className="columns">
                     <div className="column is-full">
                         <div className="buttons has-addons is-right">
                             <button className="button" onClick={this.toggleFormVisibility}>
@@ -30,14 +28,15 @@ export default class Entries extends React.Component {
                     </div>
                 </div>
                 <div className="columns">
-                    <div id="entries" className={`column ${this.state.isFormVisible ? 'is-6' : 'is-full'}`}>
+                    <div className={`column ${this.state.isFormVisible ? 'is-6' : 'is-full'}`}>
                         <Table
                             journalEntries={this.props.journalEntries}
                             getJournalEntries={this.props.getJournalEntries}
                         />
                     </div>
-                    <div id="form" className={'column is-6'}>
-                        <Form getJournalEntries={this.props.getJournalEntries} />
+                    <div className={'column is-6'}>
+                        <Form getJournalEntries={this.props.getJournalEntries}
+                        />
                     </div>
                 </div>
             </>
