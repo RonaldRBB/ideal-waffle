@@ -1,19 +1,29 @@
 import React from 'react';
 import Form from './form';
 import Table from './table';
+import Pog from '../../services/journal';
 
 export default class Entries extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isFormVisible: false
+            isFormVisible: false,
+            entry: null
         };
         this.toggleFormVisibility = this.toggleFormVisibility.bind(this);
     }
-    toggleFormVisibility() {
-        this.setState(prevState => ({
-            isFormVisible: !prevState.isFormVisible
-        }));
+    toggleFormVisibility(bool) {
+        this.setState({ "isFormVisible": bool });
+    }
+    async editEntry(id) {
+        const pog = new Pog();
+        try {
+            const entry = await pog.getOne(id);
+            await this.setState({ "entry": entry });
+            this.toggleFormVisibility(true);
+        } catch (error) {
+            console.error('Error fetching entry:', error);
+        }
     }
     render() {
         return (
@@ -21,7 +31,7 @@ export default class Entries extends React.Component {
                 <div className="columns">
                     <div className="column is-full">
                         <div className="buttons has-addons is-right">
-                            <button className="button" onClick={this.toggleFormVisibility}>
+                            <button className="button" onClick={() => this.toggleFormVisibility(!this.state.isFormVisible)}>
                                 {this.state.isFormVisible ? 'Hide' : 'Show'}
                             </button>
                         </div>
@@ -32,10 +42,12 @@ export default class Entries extends React.Component {
                         <Table
                             journalEntries={this.props.journalEntries}
                             getJournalEntries={this.props.getJournalEntries}
+                            editEntry={this.editEntry.bind(this)}
                         />
                     </div>
                     <div className={'column is-6'}>
                         <Form getJournalEntries={this.props.getJournalEntries}
+                            entry={this.state.entry}
                         />
                     </div>
                 </div>

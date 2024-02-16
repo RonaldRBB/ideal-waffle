@@ -8,6 +8,7 @@ export default class Table extends React.Component {
             <Row key={entry.id}
                 entry={entry}
                 getJournalEntries={this.props.getJournalEntries}
+                editEntry={this.props.editEntry}
             />
         ));
     }

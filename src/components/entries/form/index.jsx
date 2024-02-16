@@ -5,14 +5,24 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: null,
             title: '',
             content: ''
         }
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleContentChange = this.handleContentChange.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+        this.handleDelete = this.eraseForm.bind(this);
         this.submitEntry = this.submitEntry.bind(this);
-
+    }
+    componentDidUpdate(prevProps) {
+        const { entry } = this.props;
+        if (entry !== prevProps.entry) {
+            this.setState({
+                id: entry ? entry.id : null,
+                title: entry ? entry.title : '',
+                content: entry ? entry.content : ''
+            });
+        }
     }
     handleTitleChange(event) {
         this.setState({
@@ -24,26 +34,31 @@ class Form extends React.Component {
             content: event.target.value
         });
     }
-    handleDelete(event) {
+    eraseForm(event) {
         event.preventDefault();
         this.setState({
+            id: null,
             title: '',
             content: ''
         });
     }
     submitEntry(event) {
         event.preventDefault();
-        const { title, content } = this.state;
+        const { id, title, content } = this.state;
         const { t } = this.props;
         if (title === '' || content === '') {
             alert(t('alertErrorSubmit'));
             return;
         }
-        event.preventDefault();
         const pog = new Pog();
-        pog.create(4, title, content);
+        if (id) {
+            pog.update(id, title, content);
+        } else {
+            pog.create(4, title, content); 
+        }
         this.props.getJournalEntries();
         this.setState({
+            id: null,
             title: '',
             content: ''
         });
@@ -73,7 +88,6 @@ class Form extends React.Component {
                                 placeholder={t('entryForm.content')}
                                 value={this.state.content}
                                 onChange={this.handleContentChange}
-                                rows="14"
                             />
                         </div>
                     </div>
@@ -89,7 +103,7 @@ class Form extends React.Component {
                             <button
                                 className="button is-link is-light"
                                 type="button"
-                                onClick={this.handleDelete}>
+                                onClick={this.eraseForm}>
                                 {t('cancelButton')}
                             </button>
                         </div>
