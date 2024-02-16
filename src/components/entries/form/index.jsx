@@ -11,7 +11,7 @@ class Form extends React.Component {
         }
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleContentChange = this.handleContentChange.bind(this);
-        this.handleDelete = this.eraseForm.bind(this);
+        this.eraseForm = this.eraseForm.bind(this); // Asegúrate de enlazar eraseForm aquí
         this.submitEntry = this.submitEntry.bind(this);
     }
     componentDidUpdate(prevProps) {
