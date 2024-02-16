@@ -4,8 +4,8 @@
         "title": "Título",
         "content": "Contenido"
     },
-    "submitButton": "Enviar",
-    "cancelButton": "Cancelar",
+    "submitButton": "Guardar",
+    "clearButton": "Limpiar",
     "saveButton": "Guardar",
     "editButton": "Editar",
     "deleteButton": "Eliminar",

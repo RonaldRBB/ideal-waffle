@@ -1,5 +1,4 @@
 import React from 'react';
-import Pog from '../../../services/journal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 class Row extends React.Component {
     constructor(props) {
@@ -9,7 +8,6 @@ class Row extends React.Component {
         };
         this.showIcons = this.showIcons.bind(this);
         this.hideIcons = this.hideIcons.bind(this);
-        this.deleteEntry = this.deleteEntry.bind(this);
     }
     showIcons() {
         this.setState({ opacity: .2 });
@@ -19,13 +17,6 @@ class Row extends React.Component {
     }
     handleIconOpacity(event) {
         event.target.style.opacity = event.target.style.opacity === '1' ? '.2' : '1';
-    }
-    deleteEntry(id) {
-        const answer = window.confirm("Do you really want to delete?");
-        if (!answer) return;
-        const pog = new Pog();
-        pog.delete(id);
-        this.props.getJournalEntries();
     }
     render() {
         const { entry } = this.props;
@@ -46,15 +37,6 @@ class Row extends React.Component {
                             onClick={() => this.props.editEntry(entry.id)}
                         >
                             <FontAwesomeIcon icon="fa-solid fa-pen" />
-                        </span>
-                        <span
-                            onMouseEnter={this.handleIconOpacity}
-                            onMouseLeave={this.handleIconOpacity}
-                            className="icon"
-                            style={{ cursor: 'pointer', opacity: this.state.opacity }}
-                            onClick={() => this.deleteEntry(entry.id)}
-                        >
-                            <FontAwesomeIcon icon="fa-solid fa-trash-can" />
                         </span>
                     </span>
                 </td>

@@ -4,8 +4,8 @@
         "title": "Title",
         "content": "Content"
     },
-    "submitButton": "Submit",
-    "cancelButton": "Cancel",
+    "submitButton": "Save",
+    "clearButton": "Clear",
     "saveButton": "Save",
     "editButton": "Edit",
     "deleteButton": "Delete",
