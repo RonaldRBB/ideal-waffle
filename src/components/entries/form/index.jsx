@@ -82,7 +82,9 @@ class Form extends React.Component {
         this.setState({
             id: null,
             title: '',
-            content: ''
+            content: '',
+            showTitleError: false,
+            showContentError: false
         })
         this.props.getJournalEntries();
     }
@@ -94,7 +96,7 @@ class Form extends React.Component {
                     <div className="field">
                         <div className="control">
                             <input
-                                className={`input ${this.state.showTitleError ? "is-danger" : ""}`}
+                                className={`input-ne ${this.state.showTitleError ? "is-danger" : ""}`}
                                 type="text"
                                 placeholder={t('entryForm.title')}
                                 value={this.state.title}
@@ -108,7 +110,7 @@ class Form extends React.Component {
                     <div className="field">
                         <div className="control">
                             <textarea
-                                className={`textarea ${this.state.showContentError ? "is-danger" : ""}`}
+                                className={`textarea-ne ${this.state.showContentError ? "is-danger" : ""}`}
                                 placeholder={t('entryForm.content')}
                                 value={this.state.content}
                                 onChange={this.handleContentChange}
