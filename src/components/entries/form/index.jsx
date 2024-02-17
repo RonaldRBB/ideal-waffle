@@ -8,7 +8,9 @@ class Form extends React.Component {
         this.state = {
             id: null,
             title: '',
-            content: ''
+            content: '',
+            showTitleError: false,
+            showContentError: false
         }
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleContentChange = this.handleContentChange.bind(this);
@@ -41,15 +43,18 @@ class Form extends React.Component {
         this.setState({
             id: null,
             title: '',
-            content: ''
+            content: '',
+            showTitleError: false,
+            showContentError: false
         });
     }
     submitEntry(event) {
         event.preventDefault();
         const { id, title, content } = this.state;
-        const { t } = this.props;
-        if (title === '' || content === '') {
-            alert(t('alertErrorSubmit'));
+        const showTitleError = title === '';
+        const showContentError = content === '';
+        if (showTitleError || showContentError) {
+            this.setState({ showTitleError, showContentError });
             return;
         }
         const pog = new Pog();
@@ -62,7 +67,9 @@ class Form extends React.Component {
         this.setState({
             id: null,
             title: '',
-            content: ''
+            content: '',
+            showTitleError: false,
+            showContentError: false
         });
     }
     deleteEntry(event) {
@@ -88,24 +95,28 @@ class Form extends React.Component {
                         <label className="label">{t('entryForm.title')}</label>
                         <div className="control">
                             <input
-                                className="input"
+                                className={`input ${this.state.showTitleError ? "is-danger" : ""}`}
                                 type="text"
                                 placeholder={t('entryForm.title')}
                                 value={this.state.title}
                                 onChange={this.handleTitleChange}
                             />
                         </div>
+                        <div>
+                            {this.state.showTitleError && <p class="help is-danger">This field is required</p>}
+                        </div>
                     </div>
                     <div className="field">
                         <label className="label">{t('entryForm.content')}</label>
                         <div className="control">
                             <textarea
-                                className="textarea"
+                                className={`textarea ${this.state.showContentError ? "is-danger" : ""}`}
                                 placeholder={t('entryForm.content')}
                                 value={this.state.content}
                                 onChange={this.handleContentChange}
                             />
                         </div>
+                        {this.state.showContentError && <p class="help is-danger">This field is required</p>}
                     </div>
                     <div className="field has-addons has-addons-right">
                         <div className="control">
