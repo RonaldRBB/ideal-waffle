@@ -4,3 +4,15 @@
 .is-hidden {
     transition: width 0.5s ease;
 }
+.box-ns {
+    background-color: white;
+    border-radius: 6px;
+    color: #4a4a4a;
+    display: block;
+    padding: 1.25rem;
+
+    align-items: center;
+    border: 1px solid #dbdbdb;
+    font-size: 1rem;
+    line-height: 1.5;
+}

@@ -14,7 +14,7 @@ export default class Table extends React.Component {
     }
     render() {
         return (
-            <div className="table-container box">
+            <div className="table-container box-ns">
                 <table className="table bordered is-striped is-hoverable is-fullwidth">
                     <tbody>
                         {this.tableEntries()}

@@ -6,7 +6,7 @@ class Footer extends React.Component {
         const { t } = this.props;
         const currentYear = new Date().getFullYear();
         return (
-            <footer className="footer has-background-primary">
+            <footer className="footer">
                 <div className="content has-text-centered">
                     <p>
                         {t('appName')} - &copy; {currentYear}

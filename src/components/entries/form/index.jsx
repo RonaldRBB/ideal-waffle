@@ -82,7 +82,7 @@ class Form extends React.Component {
     render() {
         const { t } = this.props;
         return (
-            <div className="box">
+            <div className="box-ns">
                 <form onSubmit={this.submitEntry}>
                     <div className="field">
                         <label className="label">{t('entryForm.title')}</label>
