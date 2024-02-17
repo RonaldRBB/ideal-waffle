@@ -92,7 +92,6 @@ class Form extends React.Component {
             <div className="box-ns">
                 <form onSubmit={this.submitEntry}>
                     <div className="field">
-                        <label className="label">{t('entryForm.title')}</label>
                         <div className="control">
                             <input
                                 className={`input ${this.state.showTitleError ? "is-danger" : ""}`}
@@ -107,7 +106,6 @@ class Form extends React.Component {
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label">{t('entryForm.content')}</label>
                         <div className="control">
                             <textarea
                                 className={`textarea ${this.state.showContentError ? "is-danger" : ""}`}
