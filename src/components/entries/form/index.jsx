@@ -102,7 +102,7 @@ class Form extends React.Component {
                             />
                         </div>
                         <div>
-                            {this.state.showTitleError && <p class="help is-danger">This field is required</p>}
+                            {this.state.showTitleError && <p className="help is-danger">This field is required</p>}
                         </div>
                     </div>
                     <div className="field">
@@ -114,7 +114,7 @@ class Form extends React.Component {
                                 onChange={this.handleContentChange}
                             />
                         </div>
-                        {this.state.showContentError && <p class="help is-danger">This field is required</p>}
+                        {this.state.showContentError && <p className="help is-danger">This field is required</p>}
                     </div>
                     <div className="field has-addons has-addons-right">
                         <div className="control">
