@@ -24,7 +24,9 @@ class Form extends React.Component {
             this.setState({
                 id: entry ? entry.id : null,
                 title: entry ? entry.title : '',
-                content: entry ? entry.content : ''
+                content: entry ? entry.content : '',
+                showTitleError: false,
+                showContentError: false
             });
         }
     }
