@@ -31,14 +31,10 @@ class Form extends React.Component {
         }
     }
     handleTitleChange(event) {
-        this.setState({
-            title: event.target.value
-        });
+        this.setState({ title: event.target.value });
     }
     handleContentChange(event) {
-        this.setState({
-            content: event.target.value
-        });
+        this.setState({ content: event.target.value });
     }
     eraseForm(event) {
         event.preventDefault();
@@ -60,11 +56,7 @@ class Form extends React.Component {
             return;
         }
         const pog = new Pog();
-        if (id) {
-            pog.update(id, title, content);
-        } else {
-            pog.create(4, title, content);
-        }
+        id ? pog.update(id, title, content) : pog.create(4, title, content);
         this.props.getJournalEntries();
         this.setState({
             id: null,
