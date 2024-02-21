@@ -97,14 +97,12 @@ class Form extends React.Component {
         this.setState({ isContentEditable: false });
     }
     convertToHTML(content) {
-        const lines = content.split('\n');
-        const htmlContent = lines.map((line, index) => (
-            <div key={index}>
-                {line}
-                <br />
-            </div>
-        ));
-        return htmlContent;
+        const youtubeRegex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/gi;
+        content = content.replace(youtubeRegex, '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
+        content = content.replace(/\n/g, '<br>');
+        const div = document.createElement('div');
+        div.innerHTML = content;
+        return <span dangerouslySetInnerHTML={{ __html: div.innerHTML }} />;
     }
     render() {
         const { t } = this.props;
@@ -142,7 +140,9 @@ class Form extends React.Component {
                             </div>
                         ) : (
                             <div className="control">
-                                <div className="textarea-ne">{this.state.content === '' ? t('entryForm.content') : this.convertToHTML(this.state.content)}</div>
+                                <div className="textarea-ne">
+                                    {this.state.content === '' ? t('entryForm.content') : this.convertToHTML(this.state.content)}
+                                </div>
                                 {this.state.showContentError && <p className="help is-danger">This field is required</p>}
                             </div>
                         )}
