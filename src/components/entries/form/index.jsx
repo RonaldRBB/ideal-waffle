@@ -10,13 +10,17 @@ class Form extends React.Component {
             title: '',
             content: '',
             showTitleError: false,
-            showContentError: false
+            showContentError: false,
+            isContentEditable: false
         }
+        this.textareaRef = React.createRef();
         this.handleTitleChange = this.handleTitleChange.bind(this);
         this.handleContentChange = this.handleContentChange.bind(this);
         this.eraseForm = this.eraseForm.bind(this);
         this.submitEntry = this.submitEntry.bind(this);
         this.deleteEntry = this.deleteEntry.bind(this);
+        this.handleClickOnContent = this.handleClickOnContent.bind(this);
+        this.handleContentBlur = this.handleContentBlur.bind(this);
     }
     componentDidUpdate(prevProps) {
         const { entry } = this.props;
@@ -82,6 +86,26 @@ class Form extends React.Component {
         })
         this.props.getJournalEntries();
     }
+    handleClickOnContent() {
+        this.setState({ isContentEditable: true }, () => {
+            if (this.textareaRef.current) {
+                this.textareaRef.current.focus();
+            }
+        });
+    }
+    handleContentBlur() {
+        this.setState({ isContentEditable: false });
+    }
+    convertToHTML(content) {
+        const lines = content.split('\n');
+        const htmlContent = lines.map((line, index) => (
+            <div key={index}>
+                {line}
+                <br />
+            </div>
+        ));
+        return htmlContent;
+    }
     render() {
         const { t } = this.props;
         return (
@@ -90,7 +114,7 @@ class Form extends React.Component {
                     <div className="field">
                         <div className="control">
                             <input
-                                className={`input-ne ${this.state.showTitleError ? "is-danger" : ""}`}
+                                className={`input-ne`}
                                 type="text"
                                 placeholder={t('entryForm.title')}
                                 value={this.state.title}
@@ -101,16 +125,27 @@ class Form extends React.Component {
                             {this.state.showTitleError && <p className="help is-danger">This field is required</p>}
                         </div>
                     </div>
-                    <div className="field">
-                        <div className="control">
-                            <textarea
-                                className={`textarea-ne ${this.state.showContentError ? "is-danger" : ""}`}
-                                placeholder={t('entryForm.content')}
-                                value={this.state.content}
-                                onChange={this.handleContentChange}
-                            />
-                        </div>
-                        {this.state.showContentError && <p className="help is-danger">This field is required</p>}
+                    <div className="field" onClick={this.handleClickOnContent}>
+                        {this.state.isContentEditable ? (
+                            <div className="control">
+                                <textarea
+                                    ref={this.textareaRef}
+                                    id="content"
+                                    className={`textarea-ne`}
+                                    placeholder={t('entryForm.content')}
+                                    value={this.state.content}
+                                    onChange={this.handleContentChange}
+                                    rows={this.state.content.split('\n').length}
+                                    onBlur={this.handleContentBlur}
+                                />
+                                {this.state.showContentError && <p className="help is-danger">This field is required</p>}
+                            </div>
+                        ) : (
+                            <div className="control">
+                                <div className="textarea-ne">{this.state.content === '' ? t('entryForm.content') : this.convertToHTML(this.state.content)}</div>
+                                {this.state.showContentError && <p className="help is-danger">This field is required</p>}
+                            </div>
+                        )}
                     </div>
                     <div className="field has-addons has-addons-right">
                         <div className="control">
@@ -138,8 +173,8 @@ class Form extends React.Component {
                             </button>
                         </div>
                     </div>
-                </form>
-            </div>
+                </form >
+            </div >
         )
     }
 }
