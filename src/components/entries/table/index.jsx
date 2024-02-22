@@ -2,7 +2,6 @@ import React from 'react';
 import Row from './row';
 export default class Table extends React.Component {
     tableEntries() {
-        console.log("entries: ", this.props.journalEntries);
         if (!this.props.journalEntries) return null;
         return this.props.journalEntries.map((entry) => (
             <Row key={entry.id}

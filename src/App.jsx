@@ -29,7 +29,11 @@ class App extends React.Component {
     async getJournalEntries() {
         const pog = new Pog();
         const journalEntries = (await pog.index()).sort((a, b) => b.id - a.id);
-        this.setState({ journalEntries });
+        this.setState(prevState => {
+            if (prevState.journalEntries !== journalEntries) {
+                return { journalEntries: journalEntries };
+            }
+        });
     }
     render() {
         return <>
