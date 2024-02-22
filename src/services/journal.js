@@ -9,7 +9,7 @@ export default class Pog {
         };
     }
     async index() {
-        return await this.fetchAPI('/journal_entriesds');
+        return await this.fetchAPI('/journal_entries');
     }
     async getOne(id) {
         return await this.fetchAPI(`/${this.endpoint}/${id}`);
@@ -43,7 +43,7 @@ export default class Pog {
             }
             return await response.json();
         } catch (error) {
-            throw  new Error(`${i18n.t('apiError')} ${endpoint}: ${error}`);
+            throw new Error(`${i18n.t('apiError')} ${endpoint}: ${error}`);
         }
     }
 }

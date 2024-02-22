@@ -17,13 +17,9 @@ export default class Entries extends React.Component {
     }
     async editEntry(id) {
         const pog = new Pog();
-        try {
-            const entry = await pog.getOne(id);
-            await this.setState({ "entry": entry });
-            this.toggleFormVisibility(true);
-        } catch (error) {
-            console.error('Error fetching entry:', error);
-        }
+        const entry = await pog.getOne(id);
+        await this.setState({ "entry": entry });
+        this.toggleFormVisibility(true);
     }
     render() {
         return (
