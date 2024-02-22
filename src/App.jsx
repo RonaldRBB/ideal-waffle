@@ -27,13 +27,9 @@ class App extends React.Component {
         if (callback) { callback(newLang); }
     }
     async getJournalEntries() {
-        try {
-            const pog = new Pog();
-            const journalEntries = (await pog.index()).sort((a, b) => b.id - a.id);
-            this.setState({ journalEntries });
-        } catch (error) {
-            console.error('Error handling JSON data:', error);
-        }
+        const pog = new Pog();
+        const journalEntries = (await pog.index()).sort((a, b) => b.id - a.id);
+        this.setState({ journalEntries });
     }
     render() {
         return <>

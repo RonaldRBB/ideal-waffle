@@ -9,5 +9,7 @@
     "saveButton": "Save",
     "editButton": "Edit",
     "deleteButton": "Delete",
-    "alertErrorSubmit": "Error: Title and content must not be empty."
+    "alertErrorSubmit": "Error: Title and content must not be empty.",
+    "httpError": "HTTP error! status:"
+    ,"apiError": "Error fetching data from endpoint:"
 }

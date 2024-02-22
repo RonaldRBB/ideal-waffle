@@ -9,5 +9,7 @@
     "saveButton": "Guardar",
     "editButton": "Editar",
     "deleteButton": "Eliminar",
-    "alertErrorSubmit": "Error: El título y el contenido no deben estar vacíos."
+    "alertErrorSubmit": "Error: El título y el contenido no deben estar vacíos.",
+    "httpError": "Error HTTP! estado:",
+    "apiError": "Error al obtener datos desde el endpoint:"
 }
