@@ -97,7 +97,7 @@ class Form extends React.Component {
         this.setState({ isContentEditable: false });
     }
     convertToHTML(content) {
-        const youtubeRegex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/gi;
+        const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([\w\-_]+)/gi;
         content = content.replace(youtubeRegex, '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
         content = content.replace(/\n/g, '<br>');
         const div = document.createElement('div');
