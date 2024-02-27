@@ -17,7 +17,7 @@ class Navbar extends React.Component {
     render() {
         const { t } = this.props;
         return (
-            <nav className="navbar">
+            <nav className="navbar is-white-bis">
                 <div className="navbar-brand">
                     <a className="navbar-item" href="/">
                         <img className='image is-32x32'

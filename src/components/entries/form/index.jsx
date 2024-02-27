@@ -11,7 +11,13 @@ class Form extends React.Component {
             content: '',
             showTitleError: false,
             showContentError: false,
-            isContentEditable: false
+            isContentEditable: false,
+            selectedOptions: [],
+            options: [
+                "Argentina", "Bolivia", "Brazil", "Chile",
+                "Colombia", "Ecuador", "Guyana", "Paraguay",
+                "Peru", "Suriname", "Uruguay", "Venezuela"
+            ]
         }
         this.textareaRef = React.createRef();
         this.handleTitleChange = this.handleTitleChange.bind(this);
@@ -21,6 +27,8 @@ class Form extends React.Component {
         this.deleteEntry = this.deleteEntry.bind(this);
         this.handleClickOnContent = this.handleClickOnContent.bind(this);
         this.handleContentBlur = this.handleContentBlur.bind(this);
+        // Enlazar handleSelect
+        this.handleSelect = this.handleSelect.bind(this);
     }
     componentDidUpdate(prevProps) {
         const { entry } = this.props;
@@ -29,6 +37,7 @@ class Form extends React.Component {
                 id: entry ? entry.id : null,
                 title: entry ? entry.title : '',
                 content: entry ? entry.content : '',
+                created_at: entry ? entry.created_at : '',
                 showTitleError: false,
                 showContentError: false
             });
@@ -104,6 +113,23 @@ class Form extends React.Component {
         div.innerHTML = content;
         return <span dangerouslySetInnerHTML={{ __html: div.innerHTML }} />;
     }
+    handleSelect(event) {
+        event.preventDefault();
+        const value = event.target.value;
+        this.setState(prevState => ({
+            selectedOptions: [...prevState.selectedOptions, value],
+            options: prevState.options.filter(option => option !== value)
+        }));
+    }
+
+    handleRemove(optionToRemove) {
+        const updatedOptions = this.state.selectedOptions.filter(option => option !== optionToRemove);
+        this.setState(prevState => ({
+            selectedOptions: updatedOptions,
+            options: [...prevState.options, optionToRemove]
+        }));
+    }
+
     render() {
         const { t } = this.props;
         return (
@@ -112,7 +138,7 @@ class Form extends React.Component {
                     <div className="field">
                         <div className="control">
                             <input
-                                className={`input-ne`}
+                                className="input-ne input-ne-title"
                                 type="text"
                                 placeholder={t('entryForm.title')}
                                 value={this.state.title}
@@ -121,6 +147,46 @@ class Form extends React.Component {
                         </div>
                         <div>
                             {this.state.showTitleError && <p className="help is-danger">This field is required</p>}
+                        </div>
+                    </div>
+                    <div className="field is-horizontal">
+                        <div className="field-label is-normal" style={{ display: "flex", alignItems: "center", paddingTop: 0 }}>
+                            <label className="label">Fecha de Creación:</label>
+                        </div>
+                        <div className="field-body">
+                            <div className="field">
+                                <p className="control is-expanded">
+                                    <input className="input-ne" value={this.state.created_at} />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="field is-horizontal">
+                        <div className="field-label is-normal" style={{ display: "flex", alignItems: "center", paddingTop: 0 }}>
+                            <label className="label">Etiqueta:</label>
+                        </div>
+                        <div className="field-body">
+                            <div>
+                                <div className="select">
+                                    <select onChange={this.handleSelect}>
+                                        <option value="">Selecciona una opción</option>
+                                        {this.state.options.map(option => (
+                                            <option key={option} value={option}>{option}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="field is-grouped is-grouped-multiline">
+                                    {this.state.selectedOptions.map(option => (
+                                        <div key={option} className="control">
+                                            <div className="tags has-addons">
+                                                <span className="tag is-link">{option}</span>
+                                                <button className="tag is-delete" onClick={() => this.handleRemove(option)}></button>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="field" onClick={this.handleClickOnContent}>
